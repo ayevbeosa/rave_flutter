@@ -12,13 +12,13 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_svg: ^0.18.1
-  http: ^0.12.2
+  http: ^0.13.4
   intl: ^0.17.0
   meta: ^1.1.8
   async: ^2.4.2
-  dio: ^3.0.10
+  dio: ^4.0.1
   get_it: ^4.0.4
-  equatable: ^1.2.4
+  equatable: ^2.0.3
   tripledes: ^2.1.0
   webview_flutter: ^0.3.22+1
 
