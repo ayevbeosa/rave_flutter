@@ -45,16 +45,16 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
                 child: Text('Yes'),
                 isDestructiveAction: true,
                 onPressed: () {
-                  Navigator.pop(context, true); // Returning true to
-                  // _onWillPop will pop again.
+                  // Returning true to _onWillPop will pop again.
+                  Navigator.pop(context, true);
                 },
               ),
               CupertinoDialogAction(
                 child: Text('No'),
                 isDefaultAction: true,
                 onPressed: () {
-                  Navigator.pop(context,
-                      false); // Pops the confirmation dialog but not the page.
+                  // Pops the confirmation dialog but not the page.
+                  Navigator.pop(context, false);
                 },
               ),
             ],
@@ -62,18 +62,20 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
         : AlertDialog(
             content: text,
             actions: <Widget>[
-              FlatButton(
-                  child: Text('NO'),
-                  onPressed: () {
-                    Navigator.of(context).pop(
-                        false); // Pops the confirmation dialog but not the page.
-                  }),
-              FlatButton(
-                  child: Text('YES'),
-                  onPressed: () {
-                    Navigator.of(context).pop(
-                        true); // Returning true to _onWillPop will pop again.
-                  })
+              TextButton(
+                child: Text('NO'),
+                onPressed: () {
+                  // Pops the confirmation dialog but not the page.
+                  Navigator.of(context).pop(false);
+                },
+              ),
+              TextButton(
+                child: Text('YES'),
+                onPressed: () {
+                  // Returning true to _onWillPop will pop again.
+                  Navigator.of(context).pop(true);
+                },
+              )
             ],
           );
 

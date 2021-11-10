@@ -71,11 +71,14 @@ class RavePayManager {
     // Primary and accent colors are from Flutterwave's logo color
     return Theme.of(context).copyWith(
       primaryColor: Colors.black,
-      accentColor: MyColors.buttercup,
       buttonTheme: Theme.of(context).buttonTheme.copyWith(
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(5))),
+              borderRadius: BorderRadius.all(Radius.circular(5)),
+            ),
           ),
+      colorScheme: ColorScheme.fromSwatch().copyWith(
+        secondary: MyColors.buttercup,
+      ),
     );
   }
 }

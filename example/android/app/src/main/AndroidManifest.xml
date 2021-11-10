@@ -7,7 +7,6 @@
          additional functionality it is fine to subclass or reimplement
          FlutterApplication and put your custom class here. -->
     <application
-        android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:label="rave_flutter_example">
         <activity

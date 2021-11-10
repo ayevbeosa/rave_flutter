@@ -127,7 +127,7 @@ class RavePayInitializer {
     this.acceptMpesaPayments = false,
     this.acceptCardPayments = true,
     this.acceptAccountPayments = true,
-    this.acceptGHMobileMoneyPayments = false,
+    this.acceptGHMobileMoneyPayments = true,
     this.acceptUgMobileMoneyPayments = false,
     this.acceptMobileMoneyFrancophoneAfricaPayments = false,
     this.isPreAuth = false,

@@ -50,21 +50,27 @@ class _GhMobileMoneyPaymentWidgetState
                     color: Colors.grey[400].withOpacity(.7), width: 1),
                 borderRadius: BorderRadius.all(Radius.circular(1.5))),
             hintText: 'Select network',
+            hintStyle: TextStyle(
+              color: Colors.grey,
+            ),
           ),
           isEmpty: _selectedNetwork == null,
-          child: new DropdownButton<String>(
+          child: DropdownButton<String>(
             value: _selectedNetwork,
             isDense: true,
             onChanged: (String newValue) {
               setState(() => _selectedNetwork = newValue);
               payload.network = _selectedNetwork;
             },
-            items: _networks.map((String value) {
-              return new DropdownMenuItem<String>(
-                value: value,
-                child: new Text(value),
-              );
-            }).toList(),
+            dropdownColor: Colors.white,
+            items: _networks.map(
+              (String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              },
+            ).toList(),
           ),
         ),
       ),
@@ -109,7 +115,7 @@ class _GhMobileMoneyPaymentWidgetState
   bool showEmailField() => false;
 
   @override
-  bool get supported => false;
+  bool get supported => true;
 
   @override
   Widget buildTopWidget() {
@@ -122,23 +128,27 @@ class _GhMobileMoneyPaymentWidgetState
       return Padding(
         padding: EdgeInsets.fromLTRB(5, 5, 5, 25),
         child: RichText(
-          text: TextSpan(text: '', style: textStyle, children: <TextSpan>[
-            TextSpan(
-              text:
-                  'Please follow the instruction below to get your voucher code',
-              style: boldStyle,
-            ),
-            TextSpan(text: '\n\n\n1. Dial '),
-            TextSpan(text: '*110#', style: boldStyle),
-            TextSpan(text: ' to generate your transaction voucher.'),
-            TextSpan(text: '\n\n2. Select '),
-            TextSpan(text: 'OPTION 6', style: boldStyle),
-            TextSpan(text: ' to generate the voucher.'),
-            TextSpan(text: '\n\n\3. Enter your PIN in next prompt.'),
-            TextSpan(
+          text: TextSpan(
+            text: '',
+            style: textStyle,
+            children: <TextSpan>[
+              TextSpan(
                 text:
-                    '\n\n\4. Input the voucher generated in the voucher field below.'),
-          ]),
+                    'Please follow the instruction below to get your voucher code',
+                style: boldStyle,
+              ),
+              TextSpan(text: '\n\n\n1. Dial '),
+              TextSpan(text: '*110#', style: boldStyle),
+              TextSpan(text: ' to generate your transaction voucher.'),
+              TextSpan(text: '\n\n2. Select '),
+              TextSpan(text: 'OPTION 6', style: boldStyle),
+              TextSpan(text: ' to generate the voucher.'),
+              TextSpan(text: '\n\n\3. Enter your PIN in next prompt.'),
+              TextSpan(
+                  text:
+                      '\n\n\4. Input the voucher generated in the voucher field below.'),
+            ],
+          ),
         ),
       );
     } else {

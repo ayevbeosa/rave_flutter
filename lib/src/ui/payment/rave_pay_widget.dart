@@ -73,11 +73,12 @@ class _RavePayWidgetState extends BaseState<RavePayWidget>
   Widget buildChild(BuildContext context) {
     var column = Column(
       children: _items.map((item) {
-        var index = _items.indexOf(item);
-        return _selectedIndex == index ? item.content : buildItemHeader(index);
-      }).toList() + [
-        FlutterwaveBadge()
-      ],
+            var index = _items.indexOf(item);
+            return _selectedIndex == index
+                ? item.content
+                : buildItemHeader(index);
+          }).toList() +
+          [FlutterwaveBadge()],
     );
     Widget child = SingleChildScrollView(
       child: AnimatedSize(
@@ -175,21 +176,22 @@ class _RavePayWidgetState extends BaseState<RavePayWidget>
               if (displayAmount)
                 RichText(
                   text: TextSpan(
-                      text: '${_initializer.currency} '.toUpperCase(),
-                      style: TextStyle(
-                          fontSize: 10,
-                          color: Colors.grey[800],
-                          fontWeight: FontWeight.w600),
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: formatAmount(
-                            _initializer.amount,
-                          ),
-                          style: TextStyle(
-                            fontSize: 15,
-                          ),
-                        )
-                      ]),
+                    text: '${_initializer.currency} '.toUpperCase(),
+                    style: TextStyle(
+                        fontSize: 10,
+                        color: Colors.grey[800],
+                        fontWeight: FontWeight.w600),
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: formatAmount(
+                          _initializer.amount,
+                        ),
+                        style: TextStyle(
+                          fontSize: 15,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
             ],
           )
@@ -230,14 +232,15 @@ class _RavePayWidgetState extends BaseState<RavePayWidget>
                   color: Colors.red,
                 ),
                 AnimatedSize(
-                    child: Padding(
-                      padding: EdgeInsets.only(right: 15),
-                      child: _selectedIndex == null
-                          ? rightWidget ?? rightText
-                          : rightText,
-                    ),
-                    vsync: this,
-                    duration: Duration(milliseconds: 800)),
+                  child: Padding(
+                    padding: EdgeInsets.only(right: 15),
+                    child: _selectedIndex == null
+                        ? rightWidget ?? rightText
+                        : rightText,
+                  ),
+                  vsync: this,
+                  duration: Duration(milliseconds: 800),
+                ),
               ],
             ),
           ),
@@ -309,14 +312,18 @@ class _RavePayWidgetState extends BaseState<RavePayWidget>
     if (_initializer.acceptAccountPayments) {
       if (_initializer.country.toUpperCase() == Strings.us &&
           _initializer.currency.toUpperCase() == Strings.usd) {
-        items.add(_Item(
+        items.add(
+          _Item(
             Strings.ach,
             'note',
             AchPaymentWidget(
               manager: AchTransactionManager(
-                  context: context,
-                  onTransactionComplete: _onTransactionComplete),
-            )));
+                context: context,
+                onTransactionComplete: _onTransactionComplete,
+              ),
+            ),
+          ),
+        );
       } else if (_initializer.country.toUpperCase() == Strings.ng &&
           _initializer.currency.toUpperCase() == Strings.ngn) {
         items.add(
@@ -325,8 +332,9 @@ class _RavePayWidgetState extends BaseState<RavePayWidget>
             'bank',
             AccountPaymentWidget(
               manager: AccountTransactionManager(
-                  context: context,
-                  onTransactionComplete: _onTransactionComplete),
+                context: context,
+                onTransactionComplete: _onTransactionComplete,
+              ),
             ),
           ),
         );
@@ -340,8 +348,9 @@ class _RavePayWidgetState extends BaseState<RavePayWidget>
           'note',
           MpesaPaymentWidget(
             manager: MpesaTransactionManager(
-                context: context,
-                onTransactionComplete: _onTransactionComplete),
+              context: context,
+              onTransactionComplete: _onTransactionComplete,
+            ),
           ),
         ),
       );
@@ -354,8 +363,9 @@ class _RavePayWidgetState extends BaseState<RavePayWidget>
           'note',
           GhMobileMoneyPaymentWidget(
             manager: GhMMTransactionManager(
-                context: context,
-                onTransactionComplete: _onTransactionComplete),
+              context: context,
+              onTransactionComplete: _onTransactionComplete,
+            ),
           ),
         ),
       );
@@ -397,8 +407,7 @@ class _RavePayWidgetState extends BaseState<RavePayWidget>
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(border: Border(top: border, bottom: border)),
-      child: FlatButton(
-        color: Colors.grey[100],
+      child: TextButton(
         child: Row(
           children: <Widget>[
             SvgPicture.asset(
@@ -409,12 +418,23 @@ class _RavePayWidgetState extends BaseState<RavePayWidget>
             SizedBox(
               width: 10,
             ),
-            Flexible(child: Text('Pay with ${item.title}')),
+            Flexible(
+              child: Text(
+                'Pay with ${item.title}',
+                style: TextStyle(
+                  color: Colors.black,
+                ),
+              ),
+            ),
           ],
         ),
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(0))),
-        padding: EdgeInsets.symmetric(vertical: 17, horizontal: 20),
+        style: TextButton.styleFrom(
+          backgroundColor: Colors.grey[100],
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(0)),
+          ),
+          padding: EdgeInsets.symmetric(vertical: 17, horizontal: 20),
+        ),
         onPressed: () {
           setState(() {
             _selectedIndex = index;

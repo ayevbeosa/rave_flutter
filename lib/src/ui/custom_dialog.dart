@@ -35,24 +35,28 @@ class CustomAlertDialog extends StatelessWidget {
     final List<Widget> children = <Widget>[];
 
     if (title != null && titlePadding != null) {
-      children.add(Padding(
-        padding: titlePadding,
-        child: DefaultTextStyle(
-          style: Theme.of(context).textTheme.headline6,
-          child: Semantics(child: title, namesRoute: true),
+      children.add(
+        Padding(
+          padding: titlePadding,
+          child: DefaultTextStyle(
+            style: Theme.of(context).textTheme.headline6,
+            child: Semantics(child: title, namesRoute: true),
+          ),
         ),
-      ));
+      );
     }
 
-    children.add(Flexible(
-      child: Padding(
-        padding: contentPadding,
-        child: DefaultTextStyle(
-          style: Theme.of(context).textTheme.subtitle1,
-          child: content,
+    children.add(
+      Flexible(
+        child: Padding(
+          padding: contentPadding,
+          child: DefaultTextStyle(
+            style: Theme.of(context).textTheme.subtitle1,
+            child: content,
+          ),
         ),
       ),
-    ));
+    );
 
     return buildContent(children);
   }
@@ -63,14 +67,17 @@ class CustomAlertDialog extends StatelessWidget {
       widget = Material(
         color: Colors.white,
         child: Container(
-            child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: 10.0,
-            vertical: 20.0,
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 10.0,
+              vertical: 20.0,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: children,
+            ),
           ),
-          child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start, children: children),
-        )),
+        ),
       );
     } else {
       var body = Material(
@@ -125,9 +132,10 @@ class CustomDialog extends StatelessWidget {
         child: Center(
           child: ConstrainedBox(
             constraints: BoxConstraints(
-                minWidth: expanded
-                    ? math.min((MediaQuery.of(context).size.width - 40), 400)
-                    : 280.0),
+              minWidth: expanded
+                  ? math.min((MediaQuery.of(context).size.width - 40), 400)
+                  : 280.0,
+            ),
             child: Material(
               elevation: 50.0,
               type: MaterialType.transparency,
